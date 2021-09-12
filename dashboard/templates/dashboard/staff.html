@@ -17,15 +17,21 @@
     </body>
 </html>
 -->
-
+<!--Step 8; Move "TopNav" from "base.html" for each separate page in the "block content" -->
 {% extends 'partials/base.html'%}
+
 <!--Step 4; block title per each web page-->
 {% block title %}Staff page{% endblock %}
+
 {% block content %}
+
+{% include 'partials/topnav.html' %}
+
 <!--Step 4; for test the block content add the below tag-->
 <!--
 <h1>This is the content Staff page ..... </h1>
 -->
+
     <!--Table-->
     <div class="container">
         <div class="row my-4">

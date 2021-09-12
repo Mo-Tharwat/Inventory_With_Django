@@ -22,8 +22,11 @@
   </head>
   <body>
     {% include 'partials/nav.html' %}
-    {% include 'partials/topnav.html' %}
-    {% block content %} {% endblock %}
+    
+    <!--Step 8; Move "TopNav" from "base.html" for each separate page in the "block content" -->
+    <!--"include 'partials/topnav.html"-->
+
+    {% block content %}{% endblock %}
 
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Step 1;Add the App was created:
     'homepage.apps.HomepageConfig',
+    #Step 8;Add the App was created:
+    'user.apps.UserConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +74,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dashboard.wsgi.application'
 
+#Sep 8; Add the package of crispy forms:
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -125,8 +130,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
-
+#Step 4; asert for CSS "python manage.py collectstatic" from terminal
 STATIC_ROOT = (BASE_DIR/"asert/")
+
+#Step 10; set redirect when any user login
+LOGIN_REDIRECT_URL='dashboard_index'
 
 
 # Default primary key field type

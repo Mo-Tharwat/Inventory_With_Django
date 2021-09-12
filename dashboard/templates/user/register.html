@@ -1,0 +1,28 @@
+<!--Step 8; Add (base.html & the title) in this page -->
+{% extends 'partials/base.html' %}
+{% block title%} Register Page {% endblock %}
+
+<!--Step 8;In the first page add the following tag-->
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border bg-white p-3">
+                <h3>Registration Page</h3>
+                <hr>
+                <form  method="post">
+                    {% csrf_token %}
+                    <!--Step 8; Then change data form as the following :-->
+                    {{ form|crispy }}
+                    <br>
+                    <input type="submit" value="Register" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

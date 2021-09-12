@@ -1,0 +1,25 @@
+<!--Step 10; Add base.html & block title & crispy_forms_tags in this page -->
+{% extends 'partials/base.html' %}
+{% block title %}Logout Page{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="cols-md-5 offset-md-4">
+            <div class="border bg-white p-5">
+                <h3>Logout Page</h3>
+                <hr>
+
+                <div class="alert alert-danger">
+                    <h5>You has been logged out</h5>
+                </div>
+                <hr>
+                <a href="{% url 'user_login' %}">Login</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

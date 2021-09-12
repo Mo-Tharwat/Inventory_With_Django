@@ -18,10 +18,17 @@
 </html>
 -->
 
-{% extends 'partials/base.html'%}
+{% extends 'partials/base.html' %}
+
 <!--Step 4; block title per each web page-->
+
 {% block title %}Home Page{% endblock %}
+
 {% block content %}
+
+<!--Step 8; Move "TopNav" from "base.html" for each separate page in the "block content" -->
+{% include 'partials/topnav.html' %}
+
     <!--Graphs-->
     <div class="container">
         <div class="row my-5">

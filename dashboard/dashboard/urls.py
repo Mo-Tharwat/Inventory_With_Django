@@ -13,10 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import homepage
+
+
 from django.contrib import admin
 # Setp 1-2; Add include in the following to make mirror link between (the main of urls with the new extend file urls in the App)
 from django.urls import path, include
+
+# Step 9; Import the class of register
+from user import views as user_views
+
+#Step 10; Import auth_views class
+from django.contrib.auth import views as auth_views
 
 #Step 1; Add the following import all methods from App homepage: 
 #--from homepage import views
@@ -33,5 +40,12 @@ urlpatterns = [
     #--path('staff',views.staff, name='staff'),
     
     #Step 1-2; Add include another path:
-    path('',include('homepage.urls')),
+    #Step 10; Add in the pattern path 'dashboard' to move this main for login page
+    path('dashboard/',include('homepage.urls')),
+    #Step 8; Add the pattern of URL for register
+    path('register/',user_views.register,name='user_register'),
+    #Step 10; Add the pattern of URL for Login & Logout then Remove the pattern path 'login' to be main page in the site
+    path('',auth_views.LoginView.as_view(template_name='user/login.html'), name='user_login'),
+    path('logout/',auth_views.LogoutView.as_view(template_name='user/logout.html'), name='user_logout'),
+
 ]
