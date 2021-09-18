@@ -25,6 +25,8 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
+<!--Step 11; Add validation Login with Group Authentication-->
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
 
 <!--Step 8; Move "TopNav" from "base.html" for each separate page in the "block content" -->
 {% include 'partials/topnav.html' %}
@@ -123,4 +125,12 @@
         </div>
     </div>
     <!--End Graphs-->
+{% else %}
+    <!--Step 11; This header is test for authentication user-->
+    <!--<h1 class="alert-danger text-lg-center p-5">This is the content any users</h1>-->
+
+    <!--Step 11; Insert a new page any user without staff group user-->
+    {% include 'dashboard/staff_index.html' %}
+
+{% endif %}
 {% endblock %}

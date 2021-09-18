@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -133,8 +134,15 @@ STATICFILES_DIRS = [
 #Step 4; asert for CSS "python manage.py collectstatic" from terminal
 STATIC_ROOT = (BASE_DIR/"asert/")
 
-#Step 10; set redirect when any user login
+#Step 10; set redirect (defualt page) when any user login
 LOGIN_REDIRECT_URL='dashboard_index'
+
+#Step 11; Add LOGIN_URL ='user_login' at setting.py then write views.py the folloing:
+login_url='user_login'
+
+#Step 12; Add the media_root & media_url at setting.py
+MEDIA_ROOT = (BASE_DIR/'media')
+MEDIA_URL = '/media/'
 
 
 # Default primary key field type
