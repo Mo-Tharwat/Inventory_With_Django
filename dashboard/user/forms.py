@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-#Step 14; import these class's from form & import profile from models
+#Step 14; import profile from models
 from .models import Profile
 
 class CreateUserForm(UserCreationForm):

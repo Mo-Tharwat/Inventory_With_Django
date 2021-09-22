@@ -9,6 +9,8 @@ urlpatterns = [
     path('staff/',views.staff,name='dashboard_staff'),
     #Step 4; Add two paths for methods (products & Orders)
     path('product/',views.products,name='dashboard_products'),
+    path('product/<int:pk>/update/',views.product_update,name='dashboard_product_update'),
+    path('product/<int:pk>/delete/',views.product_delete,name='dashboard_product_delete'),
     path('order/',views.orders,name='dashboard_orders'),
     
 ]
