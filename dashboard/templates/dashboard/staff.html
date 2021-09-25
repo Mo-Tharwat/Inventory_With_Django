@@ -47,6 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!--Step 16; Add for loop in the staff users at template-->
                         {% for staff in staffs %}
                         <tr>
                             <th scope="row"><a class="btn btn-info btn-sm" href="{% url 'dashboard_staff_detail' staff.id %}">View</a></th>

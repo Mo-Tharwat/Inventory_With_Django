@@ -128,6 +128,8 @@ def staff_details(request,pk):
 #Step 11; Set validation requied login
 #@login_required(login_url='user_login')
 #Step 11; Add LOGIN_URL ='user_login' at setting.py then write views.py the folloing:
+
+#Step 16; Add queryset in the method orders
 @login_required
 def orders(request):
     allOrders=Order.objects.all()
