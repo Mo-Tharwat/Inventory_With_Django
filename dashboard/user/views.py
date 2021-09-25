@@ -4,6 +4,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 #Step 9; import all methods from form
 from .forms import CreateUserForm,UserUpdateForm,ProfileUpdateForm 
+#Step 11; Import method login_required
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -25,10 +27,12 @@ def register(request):
     return render(request,'user/register.html',context)
 
 #Step 12;Add method for user profile
+@login_required
 def profile(request):
     return render(request,'user/profile.html')
 
 #Step 14; Add method for user update profile (Edit the profile)
+@login_required
 def profile_update(request):
     if request.method=='POST':
         user_form = UserUpdateForm(request.POST,instance=request.user)

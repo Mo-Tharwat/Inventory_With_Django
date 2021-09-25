@@ -1,0 +1,59 @@
+<!--Step 16; Add base.html & block title & crispy_forms_tags in this page -->
+{% extends 'partials/base.html' %}
+{% block title %} Staff Detail {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+   <!--Table-->
+   <div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    Profile Page
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <span class="h4"> Profile Information</span>
+                            <hr>
+                            <table class="table bg-white table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Name</th>
+                                        <td>{{ detailStaffs.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td>{{ detailStaffs.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Phone</th>
+                                        <td>{{ detailStaffs.profile.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Address</th>
+                                        <td>{{ detailStaffs.profile.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Staff</th>
+                                        <td>{{ detailStaffs.is_staff }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-thumbnail" src="{{ detailStaffs.profile.image.url }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Table-->
+
+{% endblock %}

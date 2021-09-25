@@ -28,36 +28,21 @@
                             <th scope="col">Category</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Order by</th>
+                            <th scope="col">Creation date</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <!--Step 16;Add for loop in orders @ html page -->
+                        {% for allOrder in allOrders %}
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
-                                Broni
-                            </td>
+                            <th scope="row">{{allOrder.id}}</th>
+                            <td>{{allOrder.product.name}}</td>
+                            <td>{{allOrder.product.category}}</td>
+                            <td>{{allOrder.order_quantity}}</td>
+                            <td>{{allOrder.staff.username}}</td>
+                            <td>{{allOrder.date}}</td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>
-                                Kenneth
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            <td>
-                                Cecilia
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

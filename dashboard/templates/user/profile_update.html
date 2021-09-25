@@ -17,16 +17,23 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <span class="h4"> Update Profile Information</span> 
+                                <span class="h4"> Update Profile Information</span>
                                 <hr>
                                     <!--Step 14; Must to be inserted (enctype="multipart/form-data") to passing the image-->
                                     <form method="POST" enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        {{user_form|crispy}}
-                                        {{profile_form|crispy}}
-                                        <input class= "btn btn-info" type="submit" value="Update">
-                                    </form>
+                                        <table class="table bg-white table-borderless">
+                                            <tbody>
+                                            {% csrf_token %}
+                                            {{user_form|crispy}}
+                                            {{profile_form|crispy}}
+                                            <div class="row-cols-md-4">
+                                                <img class="img-thumbnail" src="{{ user.profile.image.url }}" alt="">
+                                            </div> 
+                                            <input class= "btn btn-info" type="submit" value="Update">
+                                            </tbody>
+                                        </table>
 
+                                    </form>
                                 </table>
                             </div>
                         </div>

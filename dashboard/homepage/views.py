@@ -8,6 +8,8 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 #Step 15; Import all methods in forms @ homepage App
 from .forms import *
+#Step 16; Import Users
+from django.contrib.auth.models import User
 
 
 
@@ -74,6 +76,7 @@ def products(request):
     return render(request, 'dashboard/products.html', context)
 
 #Step 15; Create two methods for "delete" & "update" product
+@login_required
 def product_delete(request,pk):
     item=Product.objects.get(id=pk)
     if request.method == 'POST':
@@ -85,6 +88,7 @@ def product_delete(request,pk):
     #Step 15; you can remove context from this method
     return render(request,'dashboard/products_delete.html',context)
 
+@login_required
 def product_update(request,pk):
     item=Product.objects.get(id=pk)
     
@@ -102,14 +106,35 @@ def product_update(request,pk):
 
     return render(request,'dashboard/products_update.html',context)
 
+#Step 16; Create two methods for "Staff" & "Details" product
+@login_required
+def staff(request):
+    staffs=User.objects.all()
 
+    context={
+        'staffs':staffs,
+    }
+    return render(request,'dashboard/staff.html', context)
 
+@login_required
+def staff_details(request,pk):
+    detailStaff=User.objects.get(id=pk)
+
+    context={
+        'detailStaffs':detailStaff,
+    }
+    return render(request, 'dashboard/staff_detail.html', context)
 
 #Step 11; Set validation requied login
 #@login_required(login_url='user_login')
 #Step 11; Add LOGIN_URL ='user_login' at setting.py then write views.py the folloing:
 @login_required
 def orders(request):
-    return render(request, 'dashboard/orders.html')
+    allOrders=Order.objects.all()
+
+    context={
+        'allOrders':allOrders,
+    }
+    return render(request, 'dashboard/orders.html', context)
 
 
