@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 #Step 16; Import Users
 from django.contrib.auth.models import User
+#step 18; Pop up message
+from django.contrib import messages
 
 
 
@@ -32,16 +34,36 @@ def staff(request):
 #Step 11; Set validation requied login
 #@login_required(login_url='user_login')
 #Step 11; Add LOGIN_URL ='user_login' at setting.py then write views.py the folloing:
+#Step 16; Create objects in index method
+#Step 17; Passing Order Form with the necessary validation
 @login_required
 def index(request):
-    return render(request, 'dashboard/index.html')
+    #Collect all data
+    #orders=Order.objects.all()
+    #Filter on login user
+    orders=Order.objects.all()
+    
+    if request.method=="POST":
+        form=OrderForm(request.POST)
+        if form.is_valid:
+            instance=form.save(commit=False)
+            instance.staff = request.user
+            instance.save()
+            #Step 18; Create a message
+            order_product_name=form.cleaned_data.get('product')
+            messages.success(request,f'Order of {order_product_name} has been created successfully')
+            #==================Step 18.
+            return redirect('dashboard_index')
+    else:
+        form=OrderForm()
 
-#Step 11; Set validation requied login
-#@login_required(login_url='user_login')
-#Step 11; Add LOGIN_URL ='user_login' at setting.py then write views.py the folloing:
-@login_required
-def staff(request):
-    return render(request, 'dashboard/staff.html')
+    context = {
+        'orders':orders,
+        'form':form,
+    }
+    return render(request, 'dashboard/index.html',context)
+
+
 
 #Step 4; Create two mentods for products & orders
 #Step 11; Set validation requied login
@@ -62,6 +84,9 @@ def products(request):
         form=ProductForm(request.POST)
         if form.is_valid():
             form.save()
+            product_name=form.cleaned_data.get('name')
+            #Step 18;
+            messages.success(request,f'{product_name} has been created successfully')
             return redirect('dashboard_products')
     else:
         form=ProductForm()
@@ -106,6 +131,9 @@ def product_update(request,pk):
 
     return render(request,'dashboard/products_update.html',context)
 
+#Step 11; Set validation requied login
+#@login_required(login_url='user_login')
+#Step 11; Add LOGIN_URL ='user_login' at setting.py then write views.py the folloing:
 #Step 16; Create two methods for "Staff" & "Details" product
 @login_required
 def staff(request):

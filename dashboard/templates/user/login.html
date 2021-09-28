@@ -7,6 +7,14 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-6 offset-md-3">
+            <!--Step 18;Create alert message-->
+            {% for x in messages %}
+            {% if x %}
+            <div class="alert alert-{{x.tags}}">
+                {{x}}
+            </div>
+            {% endif %}
+            {% endfor %}
             <div class="border bg-white p-3">
                 <h1>Login Page</h1>
                 <hr>

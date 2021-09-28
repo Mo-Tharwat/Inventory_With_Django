@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm,UserUpdateForm,ProfileUpdateForm 
 #Step 11; Import method login_required
 from django.contrib.auth.decorators import login_required
+#Step 18; import message
+from django.contrib import messages
 
 # Create your views here.
 
@@ -17,6 +19,10 @@ def register(request):
         form=CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            #Step 18;Create alert message
+            create_register=form.cleaned_data.get('username')
+            messages.success(request,f'This user "{create_register}" has been created successfully')
+            #=====================Step 18.
             return redirect('user_login')
     else:
         #form=UserCreationForm()
@@ -40,6 +46,8 @@ def profile_update(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            #Step 18;Create Alert message
+
             return redirect('user_profile')
     else:
         user_form= UserUpdateForm(instance=request.user)

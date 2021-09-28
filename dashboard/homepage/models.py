@@ -26,7 +26,7 @@ class Product (models.Model):
 
 #Step 7; Add the following Class of Order:
 class Order(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     staff = models.ForeignKey(User, models.CASCADE, default=True)
     order_quantity = models.PositiveIntegerField(default=1)
     date = models.DateTimeField(auto_now_add=True)

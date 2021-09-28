@@ -1,14 +1,23 @@
-
+<!--Step 17; Add tag crispy in the first tags-->
+{% load crispy_forms_tags %}
 <div>
     <div class="row mt-4">
         <div class="col-md-4">
+            <!--Step 18;Create message alert -->
+            {% for x in messages %}
+            {% if x %}
+            <div class="alert alert-{{x.tags}}"> {{x}}</div>
+            {% endif %}
+            {% endfor %}
             <div class="card">
                 <div class="card-header">
                     Make Request
                 </div>
                 <div class="card-body">
                     <form method="POST">
-                        
+                        <!--Step 17; Passing the form of Create orders-->
+                        {% csrf_token %}
+                        {{form|crispy}}
                         <input class="btn btn-info btn-block" type="submit" value="Make Request">
                     </form>
                 </div>
@@ -26,31 +35,24 @@
                                 <th scope="col">Product</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Quantity</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">User</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                             <!--Step 17; add for loop on all orders objects-->
+                             {% for order in orders %}
+                             <!--Step 17; make validation with if condition-->
+                             {% if order.staff == user %}
                             <tr>
-                                <td>Book</td>
-                                <td>Stationary</td>
-                                <td>10</td>
+                                <td>{{order.product.name}}</td>
+                                <td>{{order.product.category}}</td>
+                                <td>{{order.order_quantity}}</td>
+                                <td>{{order.date}}</td>
+                                <td>{{order.staff.username}}</td>
                             </tr>
-							<tr>
-                                <td>Book</td>
-                                <td>Stationary</td>
-                                <td>10</td>
-                            </tr>
-							<tr>
-                                <td>Book</td>
-                                <td>Stationary</td>
-                                <td>10</td>
-                            </tr>
-							<tr>
-                                <td>Book</td>
-                                <td>Stationary</td>
-                                <td>10</td>
-                            </tr>
-                            
+                            {% endif %}
+							{% endfor %}
                         </tbody>
                     </table>
                 </div>
