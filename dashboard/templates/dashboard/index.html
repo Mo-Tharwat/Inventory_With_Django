@@ -35,33 +35,48 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-md-6">
-                <div class="bg-white">
+                <h6 class="text-center">This is chart display the stock of products</h6>
+                <hr>
+                <div class="bg-white ">
                     <canvas id="myChart1" width="400" height="300"></canvas>
                     <script>
+                        //Step 19;For making colors backgroud and border Automated (For chart1)
+                        //
+                        const labels_products=[
+                            {% for x in products %}
+                                '{{x.name}}',
+                            {% endfor %}
+                        ];
+                        const stock_product=[
+                        {% for x in products %}
+                            {{x.quantity}},
+                        {% endfor %}         
+                        ];
+
+                        //Step 19;Create vairables for (For chart1)
+                        const backgroundcolor_chat1=[];
+                        const bordercolor_chart1=[];
+
+                        //Step 19;For loop random colors (For chart1)
+                        for(i=0;i<labels_products.length; i++){
+                            const r=Math.floor(Math.random()*255);
+                            const g=Math.floor(Math.random()*255);
+                            const b=Math.floor(Math.random()*255);
+                            backgroundcolor_chat1.push('rgba('+r+','+g+','+b+',0.2)');
+                            bordercolor_chart1.push('rgba('+r+','+g+','+b+',1)')
+                        }
+                        //=================================Step 19;colors backgroud and border Automate
+
                         var ctx = document.getElementById('myChart1').getContext('2d');
                         var myChart1 = new Chart(ctx, {
-                            type: 'pie',
+                            type: 'bar',
                             data: {
-                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                labels: labels_products,
                                 datasets: [{
-                                    label: 'Products',
-                                    data: [12, 19, 3, 5, 2, 3],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
+                                    label: 'Availble quatity Products',
+                                    data: stock_product,
+                                    backgroundColor:backgroundcolor_chat1,
+                                    borderColor:bordercolor_chart1,
                                     borderWidth: 1
                                 }]
                             },
@@ -79,33 +94,46 @@
                 </div>
             </div>
             <div class="col-md-6">
+                <h6 class="text-center">This is chart display all orders per day</h6>
+                <hr>
                 <div class="bg-white">
-                    <canvas id="myChart" width="400" height="300"></canvas>
+                    <canvas id="myChart2" width="400" height="300"></canvas>
                     <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
+                        //Step 19;For making colors backgroud and border Automated (For chart1)
+                        const labels_date=[
+                            {% for x in orders %}
+                                '{{x.date}}',
+                            {% endfor %}
+                        ];
+                        const orders=[
+                        {% for x in orders %}
+                            {{x.order_quantity}},
+                        {% endfor %}         
+                        ];
+
+                        //Step 19;Create vairables for (For chart1)
+                        const backgroundcolor_chat2=[];
+                        const bordercolor_chart2=[];
+
+                        //Step 19;For loop random colors (For chart1)
+                        for(i=0;i<labels_date.length; i++){
+                            const r=Math.floor(Math.random()*255);
+                            const g=Math.floor(Math.random()*255);
+                            const b=Math.floor(Math.random()*255);
+                            backgroundcolor_chat2.push('rgba('+r+','+g+','+b+',0.2)');
+                            bordercolor_chart2.push('rgba('+r+','+g+','+b+',1)')
+                        }
+                        //=================================Step 19;colors backgroud and border Automate
+                        var ctx = document.getElementById('myChart2').getContext('2d');
+                        var myChart2 = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                labels: labels_date,
                                 datasets: [{
-                                    label: 'Products',
-                                    data: [12, 19, 3, 5, 2, 3],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
+                                    label: 'Quatity Orders',
+                                    data: orders,
+                                    backgroundColor: backgroundcolor_chat2,
+                                    borderColor: bordercolor_chart2,
                                     borderWidth: 1
                                 }]
                             },

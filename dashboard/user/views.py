@@ -47,7 +47,9 @@ def profile_update(request):
             user_form.save()
             profile_form.save()
             #Step 18;Create Alert message
-
+            profile_name=user_form.cleaned_data.get('name')
+            messages.success(request,f'Your account {profile_name} has been successfully')
+            #=====================Step 18
             return redirect('user_profile')
     else:
         user_form= UserUpdateForm(instance=request.user)

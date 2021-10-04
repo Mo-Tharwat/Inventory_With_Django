@@ -1,14 +1,17 @@
 <!--Step 17; Add tag crispy in the first tags-->
 {% load crispy_forms_tags %}
-<div>
+<div class="p-3">
     <div class="row mt-4">
         <div class="col-md-4">
             <!--Step 18;Create message alert -->
             {% for x in messages %}
             {% if x %}
-            <div class="alert alert-{{x.tags}}"> {{x}}</div>
+            <div class="alert alert-{{x.tags}}">
+                {{x}}
+            </div>
             {% endif %}
             {% endfor %}
+            <!--======================Step 18-->
             <div class="card">
                 <div class="card-header">
                     Make Request

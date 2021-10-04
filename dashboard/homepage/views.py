@@ -42,9 +42,16 @@ def index(request):
     #orders=Order.objects.all()
     #Filter on login user
     orders=Order.objects.all()
+    products=Product.objects.all()
+
+    #Step 20; Count of objects staff
+    staffsCounts=User.objects.count()
+    productsCounts=Product.objects.count()
+    ordersCounts=Order.objects.count()
     
     if request.method=="POST":
         form=OrderForm(request.POST)
+        #item_id=Product.objects.get(id=pk)
         if form.is_valid:
             instance=form.save(commit=False)
             instance.staff = request.user
@@ -60,6 +67,11 @@ def index(request):
     context = {
         'orders':orders,
         'form':form,
+        'products':products,
+        #Step 20; Passing the objects (staffCount, productsCounts, ordersCounts) to template
+        'staffsCounts':staffsCounts,
+        'productsCounts':productsCounts,
+        'ordersCounts':ordersCounts, 
     }
     return render(request, 'dashboard/index.html',context)
 
@@ -80,13 +92,19 @@ def products(request):
     #Step 15; Add count
     counts=Product.objects.count()
 
+    #Step 20; Count of objects staff
+    staffsCounts=User.objects.all().count()
+    productsCounts=Product.objects.all().count()
+    ordersCounts=Order.objects.count()
+
     if request.method=='POST':
         form=ProductForm(request.POST)
         if form.is_valid():
             form.save()
+            #Step 18; Create a message           
             product_name=form.cleaned_data.get('name')
-            #Step 18;
             messages.success(request,f'{product_name} has been created successfully')
+            #==================Step 18.
             return redirect('dashboard_products')
     else:
         form=ProductForm()
@@ -94,9 +112,15 @@ def products(request):
     context={
         #Step 15; the name of "kokos" is the object will be pass into WebPage.html linked with quiryset "items"
         'kokos':items,
+
         #Step 15; Test count for objects
         'count_no':counts,
         'form':form,
+
+        #Step 20; Passing the objects (staffCount, productsCounts, ordersCounts) to template
+        'staffsCounts':staffsCounts,
+        'productsCounts':productsCounts,
+        'ordersCounts':ordersCounts, 
     }
     return render(request, 'dashboard/products.html', context)
 
@@ -126,7 +150,7 @@ def product_update(request,pk):
         form=ProductForm(instance=item)
     context={
         'items':item,
-        'form':form,
+        'form':form,       
     }
 
     return render(request,'dashboard/products_update.html',context)
@@ -139,8 +163,17 @@ def product_update(request,pk):
 def staff(request):
     staffs=User.objects.all()
 
+    #Step 20; Count of objects staff
+    staffsCounts=User.objects.count()
+    productsCounts=Product.objects.count()
+    ordersCounts=Order.objects.count()
+
     context={
         'staffs':staffs,
+        #Step 20; Passing the objects (staffCount, productsCounts, ordersCounts) to template
+        'staffsCounts':staffsCounts,
+        'productsCounts':productsCounts,
+        'ordersCounts':ordersCounts,
     }
     return render(request,'dashboard/staff.html', context)
 
@@ -162,8 +195,17 @@ def staff_details(request,pk):
 def orders(request):
     allOrders=Order.objects.all()
 
+    #Step 20; Count of objects staff
+    staffsCounts=User.objects.count()
+    productsCounts=Product.objects.count()
+    ordersCounts=Order.objects.count()
+
     context={
         'allOrders':allOrders,
+        #Step 20; Passing the objects (staffCount, productsCounts, ordersCounts) to template
+        'staffsCounts':staffsCounts,
+        'productsCounts':productsCounts,
+        'ordersCounts':ordersCounts,
     }
     return render(request, 'dashboard/orders.html', context)
 
